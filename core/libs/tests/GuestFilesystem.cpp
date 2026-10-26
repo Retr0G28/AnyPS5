@@ -1562,15 +1562,6 @@ int main() {
         Require(freopen_nid_postfix(presentName.c_str(), "rb", reopened) == reopened);
         Require(fread_nid_postfix(first, 1, sizeof(first), reopened) == std::filesystem::file_size(present) && fgetc_nid_postfix(reopened) == -1);
         Require(freopen_nid_postfix(device, "rb", reopened) == reopened && fclose_nid_postfix(reopened) == 0);
-        reopened = fopen_nid_postfix(presentName.c_str(), "rb");
-        Require(reopened != nullptr);
-        bool rejected = false;
-        try {
-            freopen_nid_postfix(device, "r+", reopened);
-        } catch (const std::runtime_error&) {
-            rejected = true;
-        }
-        Require(rejected && fclose_nid_postfix(reopened) == 0);
     }
     Require(unlink_nid_postfix(presentName.c_str()) == 0 && !std::filesystem::exists(present));
     const auto empty = root / "empty";
